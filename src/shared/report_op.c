@@ -310,17 +310,17 @@ void os_report_printtop(void *topstore_pt, const char *hname, int print_related)
 
         /* With location we leave more space to be clearer */
         if (!print_related) {
-            if (strlen(lkey) > 76) {
-                lkey[74] = '.';
-                lkey[75] = '.';
-                lkey[76] = '\0';
+            if (strlen(lkey) > 128) {
+                lkey[126] = '.';
+                lkey[127] = '.';
+                lkey[128] = '\0';
             }
 
             if (!dopdout) {
                 _os_header_print(print_related, hname);
                 dopdout = 1;
             }
-            l_print_out("%-78s|%-8d|", (char *)next_node->key, st_data->currently_size);
+            l_print_out("%-130s|%-8d|", (char *)next_node->key, st_data->currently_size);
         }
 
         /* Print each destination */
@@ -329,7 +329,7 @@ void os_report_printtop(void *topstore_pt, const char *hname, int print_related)
                 _os_header_print(print_related, hname);
                 dopdout = 1;
             }
-            l_print_out("%-78s|%-8d|", (char *)next_node->key, st_data->currently_size);
+            l_print_out("%-130s|%-8d|", (char *)next_node->key, st_data->currently_size);
 
             if (print_related & REPORT_REL_LOCATION) {
                 _os_report_print_related(REPORT_REL_LOCATION, st_data);
